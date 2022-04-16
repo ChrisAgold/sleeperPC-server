@@ -19,7 +19,6 @@ app.use(express.json())
 
 // ROUTE
 app.get('/', (req, res) => {
-    throw new Error('error')
     res.send('Welcome!');
 })
 
@@ -29,7 +28,7 @@ app.use('/api/v1/jobs',jobsRouter)
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 
 const start = async () => {
     try {
@@ -44,4 +43,4 @@ const start = async () => {
 
 start()
 
-//
+
