@@ -5,5 +5,3 @@ const connectDB = (url) => {
 }
 
 export default connectDB
-
-
