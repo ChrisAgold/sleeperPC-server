@@ -4,10 +4,15 @@ import { BadRequestError } from '../errors/index.js'
 
 const register = async (req, res) => {
     const {name,email,password} = req.body
-    if(!name || !email || password) {
+
+    if(!name || !email || !password) {
         throw new BadRequestError('please provide all values')
     }
-
+    // CHECK IF USER ALREADY EXIST BASED ON EMAIL
+    const userAlreadyExists = await User.findOne({email})
+    if(userAlreadyExists) {
+        throw new BadRequestError('Email already in use...')
+    }
     const user = await User.create({name,email,password})
     res.status(StatusCodes.CREATED).json({user})
 }
