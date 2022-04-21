@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import validator from 'validator'
+import bcrypt from 'bcryptjs'
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -12,16 +13,16 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "Please provide email"],
-        validate:{
-            validator:validator.isEmail,
-            message:'Please provide a valid email'
+        validate: {
+            validator: validator.isEmail,
+            message: 'Please provide a valid email'
         },
         unique: true,
     },
     password: {
         type: String,
         required: [true, "Please provide password"],
-        minLength:6,
+        minLength: 6,
     },
     location: {
         type: String,
@@ -29,6 +30,10 @@ const UserSchema = new mongoose.Schema({
         maxLength: 20,
         default: 'my city',
     },
+})
+
+UserSchema.pre('save', function () {
+
 })
 
 export default mongoose.model('User', UserSchema)
