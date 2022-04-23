@@ -1,5 +1,4 @@
 import express from 'express';
-
 const app = express()
 import dotenv from 'dotenv';
 dotenv.config();
@@ -20,7 +19,10 @@ app.use(express.json())
 
 // ROUTE
 app.get('/', (req, res) => {
-    res.send('Welcome!');
+    res.json({ msg: 'Welcome!' })
+})
+app.get('/api/v1', (req, res) => {
+    res.json('API');
 })
 
 app.use('/api/v1/auth',authRouter)
