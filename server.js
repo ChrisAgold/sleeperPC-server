@@ -1,9 +1,10 @@
-import express from 'express';
+import express from 'express'
 const app = express()
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 import 'express-async-errors'
 import morgan from 'morgan'
+
 
 // db & authenticateUser
 import connectDB from './db/connect.js';
@@ -15,7 +16,7 @@ import jobsRouter from "./routes/jobsRoutes.js";
 // MIDDLEWARE
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
-// import authenticateUser from './middleware/auth.js'
+import authenticateUser from './middleware/auth.js'
 
 // morgan middleware
 if(process.env.NODE_ENV !== 'production') {
@@ -31,14 +32,13 @@ app.get('/api/v1', (req, res) => {
     res.json('API');
 })
 
-app.use('/api/v1/auth',authRouter)
-app.use('/api/v1/jobs', jobsRouter)
-// app.use('/api/v1/jobs', authenticateUser, jobsRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/jobs', authenticateUser, jobsRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 const start = async () => {
     try {
