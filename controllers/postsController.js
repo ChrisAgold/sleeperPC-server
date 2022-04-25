@@ -14,7 +14,8 @@ const createPost = async (req, res) => {
 }
 
 const getAllPosts = async (req, res) => {
-    res.send('get all posts')
+    const posts = await Post.find({createdBy:req.user.userId})
+    res.status(StatusCodes.OK).json({posts,totalPosts:posts.length, numOfPages: 1})
 }
 
 const updatePost = async (req, res) => {
